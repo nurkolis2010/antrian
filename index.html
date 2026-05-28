@@ -10,6 +10,39 @@
     </style>
 </head>
 <body>
-    <iframe src="https://script.google.com/macros/s/AKfycbzb_KoJZFcRT40L1PLSWaG2FNE3xPYo1RGUk4xGBieRfZNPoRElM70fKoudV6-kH5xZ/exec"></iframe>
+    
+    <iframe name="bingkaiRahasia" id="frameApp"></iframe>
+
+    <script>
+        // IIFE (Immediately Invoked Function Expression) agar variabel tidak bisa diakses dari Console
+        (function() {
+            // 1. URL asli Anda sudah diubah menjadi deretan angka ASCII
+            const kode = [104,116,116,112,115,58,47,47,115,99,114,105,112,116,46,103,111,111,103,108,101,46,99,111,109,47,109,97,99,114,111,115,47,115,47,65,75,102,121,99,98,122,98,95,75,111,74,90,70,99,82,84,52,48,76,49,80,76,83,87,97,71,50,70,78,69,51,120,80,89,111,49,82,71,85,107,52,120,71,66,105,101,82,102,90,78,80,111,82,69,108,77,55,48,102,75,111,117,100,86,54,45,107,72,53,120,90,47,101,120,101,99];
+            
+            // Merakit kembali angka menjadi URL
+            let linkPalsu = "";
+            for(let i = 0; i < kode.length; i++) {
+                linkPalsu += String.fromCharCode(kode[i]);
+            }
+
+            // 2. Teknik Form Gaib
+            // Membuat form sementara, lalu melemparkannya ke dalam iframe
+            const formGaib = document.createElement('form');
+            formGaib.method = 'GET';
+            formGaib.action = linkPalsu;
+            formGaib.target = 'bingkaiRahasia'; // Menembak ke iframe kosong di atas
+            formGaib.style.display = 'none';
+            
+            document.body.appendChild(formGaib);
+            formGaib.submit(); // Eksekusi buka halaman
+            
+            // 3. Langsung hapus form agar tidak meninggalkan jejak di Inspect Element
+            setTimeout(() => {
+                document.body.removeChild(formGaib);
+                console.clear(); // Membersihkan log console jika ada
+            }, 100);
+        })();
+    </script>
+
 </body>
 </html>
