@@ -1,41 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Sistem Antrean SPMB SMKN 2 Purwodadi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Antrean SPMB 2026 - SMK Negeri 2 Purwodadi</title>
+  
+  <!-- Tailwind CSS untuk Desain Loader Premium -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
-    body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #f0f7ff; }
-    iframe { border: none; width: 100%; height: 100%; display: none; }
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
     
-    /* Animasi Loading Spinner Elegan */
-    .loader-container {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      z-index: 999; font-family: sans-serif; color: #0284c7;
+    /* Animasi Halus & Pulse */
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
     }
-    .spinner {
-      width: 50px; height: 50px;
-      border: 5px solid #bae6fd; border-top: 5px solid #0284c7;
-      border-radius: 50%; animation: spin 1s linear infinite;
-      margin-bottom: 15px;
+    .animate-pulse-slow {
+      animation: pulse-slow 2s infinite ease-in-out;
     }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
+    /* Spinner Kustom Bertema Biru */
+    .custom-spinner {
+      border: 4px solid #e0f2fe;
+      border-top: 4px solid #0284c7;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Transisi untuk kelancaran loading */
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+      pointer-events: none;
+    }
+    .fade-in {
+      opacity: 1;
+      transition: opacity 0.5s ease-in;
+    }
   </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-[#f0f7ff] via-[#e6f2fe] to-[#dbeafe] w-full h-full flex flex-col justify-between">
 
-  <div id="loader" class="loader-container">
-    <div class="spinner"></div>
-    <p style="font-weight: bold; font-size: 14px;">Menghubungkan ke Server Antrean...</p>
+  <!-- LAYER MEMUAT (LOADER SCREEN) DENGAN BRANDING SEKOLAH -->
+  <div id="loader" class="fixed inset-0 flex flex-col items-center justify-center z-50 bg-gradient-to-br from-[#f0f7ff] via-[#e6f2fe] to-[#dbeafe] transition-all duration-500">
+    
+    <!-- Wadah Konten Tengah -->
+    <div class="text-center p-6 max-w-sm flex flex-col items-center">
+      <!-- Logo SMK Negeri 2 Purwodadi -->
+      <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-lg border border-sky-100 p-3 mb-6 animate-pulse-slow">
+        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/e/eb/Logo_SMK_Negeri_2_Purwodadi.png/500px-Logo_SMK_Negeri_2_Purwodadi.png" 
+             alt="Logo SMKN 2 Purwodadi" 
+             class="w-full h-full object-contain">
+      </div>
+      
+      <!-- Teks Informasi -->
+      <h1 class="text-slate-900 font-extrabold text-lg tracking-tight mb-1">SMK Negeri 2 Purwodadi</h1>
+      <p class="text-sky-600 font-bold text-xs uppercase tracking-widest mb-8">Sistem Antrean Verifikasi Luring</p>
+      
+      <!-- Spinner -->
+      <div class="custom-spinner mb-4"></div>
+      
+      <p class="text-slate-500 font-semibold text-xs animate-pulse">Menghubungkan ke Server Antrean...</p>
+    </div>
+    
+    <!-- Footer Hak Cipta di Bagian Bawah Loader -->
+    <div class="absolute bottom-6 text-center text-[10px] text-slate-400 font-semibold">
+      &copy; 2026 SMK Negeri 2 Purwodadi. Seluruh Hak Cipta Dilindungi.
+    </div>
   </div>
 
-  <!-- Ganti src dengan URL Deploy Web App Apps Script Anda -->
-  <iframe id="appIframe" src="https://script.google.com/macros/s/AKfycbwLOHh5AdMWqCZh2oNeqTZXW2gSc68KPDm7c0iSrS-52Z5EFGWD8c1pUPoiEAcNTz07/exec" onload="hideLoader()"></iframe>
+  <!-- FRAME UTAMA (Menghubungkan langsung ke Google Apps Script Web App Anda) -->
+  <iframe id="appIframe" 
+          src="https://script.google.com/macros/s/AKfycbwLOHh5AdMWqCZh2oNeqTZXW2gSc68KPDm7c0iSrS-52Z5EFGWD8c1pUPoiEAcNTz07/exec" 
+          class="w-full h-full border-none opacity-0 transition-opacity duration-500" 
+          onload="hideLoader()">
+  </iframe>
 
+  <!-- SCRIPT KONTROL TRANSISI LOADING -->
   <script>
     function hideLoader() {
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('appIframe').style.display = 'block';
+      const loader = document.getElementById('loader');
+      const iframe = document.getElementById('appIframe');
+      
+      // Tambahkan kelas fade-out pada loader
+      loader.classList.add('fade-out');
+      
+      // Tampilkan iframe secara lembut menggunakan efek memudar (fade-in)
+      iframe.classList.remove('opacity-0');
+      iframe.classList.add('opacity-100');
+      
+      // Hapus loader sepenuhnya dari ruang render setelah transisi selesai (0.5 detik)
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 500);
     }
   </script>
 </body>
